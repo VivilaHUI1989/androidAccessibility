@@ -1,0 +1,905 @@
+﻿<!DOCTYPE HTML>
+<!-- saved from url=(0069)http://developer.android.com/guide/topics/ui/accessibility/index.html -->
+<!DOCTYPE html PUBLIC "" ""><HTML><HEAD><META content="IE=11.0000" 
+http-equiv="X-UA-Compatible">
+ 
+<META http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<META name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"> 
+<META http-equiv="X-UA-Compatible" content="IE=edge"> 
+<META name="Description" content="How to make your apps accessible to users with visual, physical, or other limitations. Robust support will increase your app's user base."> 
+<LINK href="/favicon.ico" rel="shortcut icon" type="image/x-icon"> <LINK href="http://developer.android.com/guide/topics/ui/accessibility/index.html" 
+rel="alternate" hreflang="en"> <LINK href="http://developer.android.com/intl/es/guide/topics/ui/accessibility/index.html" 
+rel="alternate" hreflang="es"> <LINK href="http://developer.android.com/intl/id/guide/topics/ui/accessibility/index.html" 
+rel="alternate" hreflang="id"> <LINK href="http://developer.android.com/intl/ja/guide/topics/ui/accessibility/index.html" 
+rel="alternate" hreflang="ja"> <LINK href="http://developer.android.com/intl/ko/guide/topics/ui/accessibility/index.html" 
+rel="alternate" hreflang="ko"> <LINK href="http://developer.android.com/intl/pt-br/guide/topics/ui/accessibility/index.html" 
+rel="alternate" hreflang="pt-br"> <LINK href="http://developer.android.com/intl/ru/guide/topics/ui/accessibility/index.html" 
+rel="alternate" hreflang="ru"> <LINK href="http://developer.android.com/intl/vi/guide/topics/ui/accessibility/index.html" 
+rel="alternate" hreflang="vi"> <LINK href="http://developer.android.com/intl/zh-cn/guide/topics/ui/accessibility/index.html" 
+rel="alternate" hreflang="zh-cn"> <LINK href="http://developer.android.com/intl/zh-tw/guide/topics/ui/accessibility/index.html" 
+rel="alternate" hreflang="zh-tw"> <TITLE>Accessibility | Android 
+Developers</TITLE> <!-- STYLESHEETS --> <LINK href="Accessibility%20%20Android%20Developers_files/css" 
+rel="stylesheet"> <LINK title="roboto" href="Accessibility%20%20Android%20Developers_files/css.css" 
+rel="stylesheet"> <LINK href="Accessibility%20%20Android%20Developers_files/default.css" 
+rel="stylesheet" type="text/css"> <!-- JAVASCRIPT --> 
+<SCRIPT src="Accessibility%20%20Android%20Developers_files/jsapi.js" type="text/javascript"></SCRIPT>
+ 
+<SCRIPT src="Accessibility%20%20Android%20Developers_files/android_3p-bundle.js" type="text/javascript"></SCRIPT>
+ 
+<SCRIPT type="text/javascript">
+  var toRoot = "/";
+  var metaTags = ["accessibility"];
+  var devsite = false;
+  var useUpdatedTemplates = false;
+</SCRIPT>
+ 
+<SCRIPT src="Accessibility%20%20Android%20Developers_files/docs.js" type="text/javascript"></SCRIPT>
+ 
+<SCRIPT>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-5831155-1', 'android.com');
+  ga('create', 'UA-49880327-2', 'android.com', {'name': 'universal'});  // New tracker);
+  ga('send', 'pageview');
+  ga('universal.send', 'pageview'); // Send page view for new tracker.
+</SCRIPT>
+ 
+<META name="GENERATOR" content="MSHTML 11.00.9600.18057"></HEAD> 
+<BODY class="gc-documentation&#10;&#10;&#10;develop guide" itemtype="http://schema.org/Article" 
+itemscope=""><A name="top"></A> <!-- dialog to prompt lang pref change when loaded from hardcoded URL
+<div id="langMessage" style="display:none">
+  <div>
+    <div class="lang en">
+      <p>You requested a page in English, would you like to proceed with this language setting?</p>
+    </div>
+    <div class="lang es">
+      <p>You requested a page in Spanish (Español), would you like to proceed with this language setting?</p>
+    </div>
+    <div class="lang ja">
+      <p>You requested a page in Japanese (日本語), would you like to proceed with this language setting?</p>
+    </div>
+    <div class="lang ko">
+      <p>You requested a page in Korean (한국어), would you like to proceed with this language setting?</p>
+    </div>
+    <div class="lang ru">
+      <p>You requested a page in Russian (Русский), would you like to proceed with this language setting?</p>
+    </div>
+    <div class="lang zh-cn">
+      <p>You requested a page in Simplified Chinese (简体中文), would you like to proceed with this language setting?</p>
+    </div>
+    <div class="lang zh-tw">
+      <p>You requested a page in Traditional Chinese (繁體中文), would you like to proceed with this language setting?</p>
+    </div>
+    <a href="#" class="button yes" onclick="return false;">
+      <span class="lang en">Yes</span>
+      <span class="lang es">Sí</span>
+      <span class="lang ja">Yes</span>
+      <span class="lang ko">Yes</span>
+      <span class="lang ru">Yes</span>
+      <span class="lang zh-cn">是的</span>
+      <span class="lang zh-tw">没有</span>
+    </a>
+    <a href="#" class="button" onclick="$('#langMessage').hide();return false;">
+      <span class="lang en">No</span>
+      <span class="lang es">No</span>
+      <span class="lang ja">No</span>
+      <span class="lang ko">No</span>
+      <span class="lang ru">No</span>
+      <span class="lang zh-cn">没有</span>
+      <span class="lang zh-tw">没有</span>
+    </a>
+  </div>
+</div> --> 
+  <!-- Header -->   
+<DIV id="header-wrapper">
+<DIV class="dac-header" id="header">
+<DIV class="dac-header-inner"><A title="Open navigation" class="dac-nav-toggle" 
+href="javascript:;" data-dac-toggle-nav=""><SPAN class="dac-nav-hamburger"><SPAN 
+class="dac-nav-hamburger-top"></SPAN><SPAN 
+class="dac-nav-hamburger-mid"></SPAN><SPAN 
+class="dac-nav-hamburger-bot"></SPAN></SPAN>         </A>         <A class="dac-header-logo" 
+href="http://developer.android.com/index.html"><IMG width="32" height="36" 
+class="dac-header-logo-image" alt="Android" src="Accessibility%20%20Android%20Developers_files/android_logo.png" 
+srcset="/assets/images/android_logo@2x.png 2x"> Developers           </A>        
+ 
+<UL class="dac-header-crumbs">
+  <LI class="dac-header-crumbs-item"><SPAN class="dac-header-crumbs-link current ">Accessibility</SPAN></LI></UL>
+<DIV class="dac-header-search" id="search-container">
+<DIV class="dac-header-search-inner">
+<DIV class="dac-sprite dac-search dac-header-search-btn" id="search-btn"></DIV>
+<FORM class="dac-header-search-form" 
+onsubmit="return submit_search()"><INPUT name="q" class="dac-header-search-input" id="search_autocomplete" onkeydown="return search_changed(event, true, '/')" onkeyup="return search_changed(event, false, '/')" onfocus="search_focus_changed(this, true)" onblur="search_focus_changed(this, false)" type="text" placeholder="Search" value="" autocomplete="off"> 
+          <A class="dac-header-search-close hide" id="search-close">close</A>    
+   </FORM></DIV><!-- end dac-header-search-inner -->   </DIV><!-- end dac-header-search --> 
+  
+<DIV class="search_filtered_wrapper">
+<DIV class="suggest-card reference no-display">
+<UL class="search_filtered"></UL></DIV>
+<DIV class="suggest-card develop no-display">
+<UL class="search_filtered"></UL>
+<DIV class="child-card guides no-display"></DIV>
+<DIV class="child-card training no-display"></DIV>
+<DIV class="child-card samples no-display"></DIV></DIV>
+<DIV class="suggest-card design no-display">
+<UL class="search_filtered"></UL></DIV>
+<DIV class="suggest-card distribute no-display">
+<UL class="search_filtered"></UL></DIV></DIV><A class="dac-header-console-btn" 
+href="https://play.google.com/apps/publish/"><SPAN class="dac-sprite dac-google-play"></SPAN> 
+          <SPAN class="dac-visible-desktop-inline">Developer</SPAN>          
+Console         </A>         <A class="dac-header-console-btn" id="studio-survey-button" 
+style="background: rgb(255, 224, 178); display: none;" onclick="onClickStudioSurvey()" 
+href="http://goo.gl/forms/dOQUuzwBsX" target="_blank">Take a 1 min survey</A>    
+           </DIV><!-- end header-wrap.wrap -->     </DIV><!-- end header -->     
+<DIV class="wrap" id="searchResults" style="display: none;">
+<H2 id="searchTitle">Results</H2>
+<DIV class="search-control" id="leftSearchControl">Loading...</DIV></DIV></DIV><!--end header-wrapper --> 
+    <!-- Navigation-->   <NAV class="dac-nav">
+<DIV class="dac-nav-dimmer" data-dac-toggle-nav=""></DIV>
+<UL class="dac-nav-list" data-dac-nav="">
+  <LI class="dac-nav-item dac-nav-head"><A title="Close navigation" class="dac-nav-link dac-nav-logo" 
+  href="javascript:;" data-dac-toggle-nav=""><IMG width="32" height="36" class="dac-logo-image" 
+  alt="Android" src="Accessibility%20%20Android%20Developers_files/android_logo.png" 
+  srcset="/assets/images/android_logo@2x.png 2x"> Developers         </A></LI>
+  <LI class="dac-nav-item home"><A class="dac-nav-link dac-visible-mobile-block" 
+  href="http://developer.android.com/index.html">Home</A>
+  <UL class="dac-nav-secondary about">
+    <LI class="dac-nav-item about"><A class="dac-nav-link" href="http://developer.android.com/about/index.html">Android</A></LI>
+    <LI class="dac-nav-item wear"><A class="dac-nav-link" href="http://developer.android.com/wear/index.html">Wear</A></LI>
+    <LI class="dac-nav-item tv"><A class="dac-nav-link" href="http://developer.android.com/tv/index.html">TV</A></LI>
+    <LI class="dac-nav-item auto"><A class="dac-nav-link" href="http://developer.android.com/auto/index.html">Auto</A></LI></UL></LI>
+  <LI class="dac-nav-item design"><A class="dac-nav-link" href="http://developer.android.com/design/index.html" 
+  es-lang="Diseñar" ja-lang="設計" ko-lang="디자인" ru-lang="Проектирование" 
+  zh-cn-lang="设计" zh-tw-lang="設計">Design</A></LI>
+  <LI class="dac-nav-item develop"><A class="dac-nav-link" href="http://developer.android.com/develop/index.html" 
+  es-lang="Desarrollar" ja-lang="開発" ko-lang="개발" ru-lang="Разработка" 
+  zh-cn-lang="开发" zh-tw-lang="開發">Develop</A>
+  <UL class="dac-nav-secondary develop">
+    <LI class="dac-nav-item training"><A class="dac-nav-link" href="http://developer.android.com/training/index.html" 
+    es-lang="Capacitación" ja-lang="トレーニング" ko-lang="교육" ru-lang="Курсы" 
+    zh-cn-lang="培训" zh-tw-lang="訓練課程">Training</A></LI>
+    <LI class="dac-nav-item guide"><A class="dac-nav-link" href="http://developer.android.com/guide/index.html" 
+    es-lang="Guías de la API" ja-lang="API ガイド" ko-lang="API 가이드" ru-lang="Руководства по API" 
+    zh-cn-lang="API 指南" zh-tw-lang="API 指南">API Guides</A></LI>
+    <LI class="dac-nav-item reference"><A class="dac-nav-link" href="http://developer.android.com/reference/packages.html" 
+    es-lang="Referencia" ja-lang="リファレンス" ko-lang="참조문서" ru-lang="Справочник" 
+    zh-cn-lang="参考" zh-tw-lang="參考資源">Reference</A></LI>
+    <LI class="dac-nav-item tools"><A class="dac-nav-link" href="http://developer.android.com/sdk/index.html" 
+    es-lang="Herramientas" ja-lang="ツール" ko-lang="도구" ru-lang="Инструменты" 
+    zh-cn-lang="工具" zh-tw-lang="相關工具">Tools</A></LI>
+    <LI class="dac-nav-item google"><A class="dac-nav-link" href="http://developer.android.com/google/index.html">Google 
+    Services</A></LI>
+    <LI class="dac-nav-item samples"><A class="dac-nav-link" href="http://developer.android.com/samples/index.html">Samples</A></LI>
+    <LI class="dac-nav-item preview"><A class="dac-nav-link" href="http://developer.android.com/preview/index.html">Preview</A></LI></UL></LI>
+  <LI class="dac-nav-item distribute"><A class="dac-nav-link" href="http://developer.android.com/distribute/index.html" 
+  es-lang="Distribuir" ja-lang="配布" ko-lang="배포" ru-lang="Распространение" 
+  zh-cn-lang="分发" zh-tw-lang="發佈">Distribute</A>
+  <UL class="dac-nav-secondary distribute">
+    <LI class="dac-nav-item googleplay"><A class="dac-nav-link" href="http://developer.android.com/distribute/googleplay/index.html">Google 
+    Play</A></LI>
+    <LI class="dac-nav-item essentials"><A class="dac-nav-link" href="http://developer.android.com/distribute/essentials/index.html">Essentials</A></LI>
+    <LI class="dac-nav-item users"><A class="dac-nav-link" href="http://developer.android.com/distribute/users/index.html">Get 
+    Users</A></LI>
+    <LI class="dac-nav-item engage"><A class="dac-nav-link" href="http://developer.android.com/distribute/engage/index.html">Engage 
+    &amp; Retain</A></LI>
+    <LI class="dac-nav-item monetize"><A class="dac-nav-link" href="http://developer.android.com/distribute/monetize/index.html">Earn</A></LI>
+    <LI class="dac-nav-item analyze"><A class="dac-nav-link" href="http://developer.android.com/distribute/analyze/index.html">Analyze</A></LI>
+    <LI class="dac-nav-item stories"><A class="dac-nav-link" href="http://developer.android.com/distribute/stories/index.html">Stories</A></LI></UL></LI></UL></NAV><!-- end navigation--> 
+    
+<DIV class="wrap clearfix" id="body-content">
+<DIV class="cols">
+<DIV class="col-4 dac-toggle dac-mobile" id="side-nav" itemtype="http://schema.org/SiteNavigationElement" 
+itemscope="">
+<DIV class="dac-visible-mobile-block" data-toggle="section"><SPAN class="dac-toggle-expand dac-devdoc-toggle"><I 
+class="dac-sprite dac-expand-more-black"></I> Show navigation</SPAN>     <SPAN 
+class="dac-toggle-collapse dac-devdoc-toggle" data-toggle-section=""><I class="dac-sprite dac-expand-less-black"></I> 
+Hide navigation</SPAN>   </DIV>
+<DIV class="dac-toggle-content" id="devdoc-nav">
+<DIV class="scroll-pane">
+<UL id="nav">
+  <LI class="nav-section">
+  <DIV class="nav-section-header"><A href="http://developer.android.com/guide/index.html"><SPAN 
+  class="en">Introduction</SPAN>       </A></DIV>
+  <UL>
+    <LI><A href="http://developer.android.com/guide/components/fundamentals.html"><SPAN 
+    class="en">App Fundamentals</SPAN></A></LI>
+    <LI><A href="http://developer.android.com/guide/practices/compatibility.html"><SPAN 
+    class="en">Device Compatibility</SPAN>           </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/security/permissions.html"><SPAN 
+    class="en">System Permissions</SPAN>         </A></LI></UL></LI>
+  <LI class="nav-section">
+  <DIV class="nav-section-header"><A href="http://developer.android.com/guide/components/index.html"><SPAN 
+  class="en">App Components</SPAN>       </A></DIV>
+  <UL>
+    <LI class="nav-section">
+    <DIV class="nav-section-header"><A href="http://developer.android.com/guide/components/intents-filters.html"><SPAN 
+    class="en">Intents and Intent Filters</SPAN>           </A></DIV>
+    <UL>
+      <LI><A href="http://developer.android.com/guide/components/intents-common.html"><SPAN 
+      class="en">Common Intents</SPAN>           </A></LI></UL></LI>
+    <LI class="nav-section">
+    <DIV class="nav-section-header"><A href="http://developer.android.com/guide/components/activities.html"><SPAN 
+    class="en">Activities</SPAN>           </A></DIV>
+    <UL>
+      <LI><A 
+      href="http://developer.android.com/guide/components/fragments.html"><SPAN 
+      class="en">Fragments</SPAN>             </A></LI>
+      <LI><A 
+      href="http://developer.android.com/guide/components/loaders.html"><SPAN 
+      class="en">Loaders</SPAN>             </A></LI>
+      <LI><A href="http://developer.android.com/guide/components/tasks-and-back-stack.html"><SPAN 
+      class="en">Tasks and Back Stack</SPAN>             </A></LI>
+      <LI><A 
+      href="http://developer.android.com/guide/components/recents.html"><SPAN 
+      class="en">Overview Screen</SPAN>             </A></LI></UL></LI>
+    <LI class="nav-section">
+    <DIV class="nav-section-header"><A href="http://developer.android.com/guide/components/services.html"><SPAN 
+    class="en">Services</SPAN>           </A></DIV>
+    <UL>
+      <LI><A href="http://developer.android.com/guide/components/bound-services.html"><SPAN 
+      class="en">Bound Services</SPAN>             </A></LI>
+      <LI><A 
+      href="http://developer.android.com/guide/components/aidl.html"><SPAN 
+      class="en">AIDL</SPAN>             </A></LI></UL></LI>
+    <LI class="nav-section">
+    <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/providers/content-providers.html"><SPAN 
+    class="en">Content Providers</SPAN>           </A></DIV>
+    <UL>
+      <LI><A href="http://developer.android.com/guide/topics/providers/content-provider-basics.html"><SPAN 
+      class="en">Content Provider Basics</SPAN>             </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/providers/content-provider-creating.html"><SPAN 
+      class="en">Creating a Content Provider</SPAN>             </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/providers/calendar-provider.html"><SPAN 
+      class="en">Calendar Provider</SPAN>             </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/providers/contacts-provider.html"><SPAN 
+      class="en">Contacts Provider</SPAN>             </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/providers/document-provider.html"><SPAN 
+      class="en">Storage Access Framework</SPAN>             </A></LI></UL></LI>
+    <LI class="nav-section">
+    <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/appwidgets/index.html"><SPAN 
+    class="en">App Widgets</SPAN>           </A></DIV>
+    <UL>
+      <LI><A href="http://developer.android.com/guide/topics/appwidgets/host.html"><SPAN 
+      class="en">App Widget Host</SPAN>             </A></LI></UL></LI>
+    <LI><A href="http://developer.android.com/guide/components/processes-and-threads.html"><SPAN 
+    class="en">Processes and Threads</SPAN>         </A></LI></UL></LI>
+  <LI class="nav-section">
+  <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/resources/index.html"><SPAN 
+  class="en">App Resources</SPAN>        </A></DIV>
+  <UL>
+    <LI><A href="http://developer.android.com/guide/topics/resources/overview.html"><SPAN 
+    class="en">Overview</SPAN>         </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/resources/providing-resources.html"><SPAN 
+    class="en">Providing Resources</SPAN>         </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/resources/accessing-resources.html"><SPAN 
+    class="en">Accessing Resources</SPAN>         </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/resources/runtime-changes.html"><SPAN 
+    class="en">Handling Runtime Changes</SPAN>           </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/resources/localization.html"><SPAN 
+    class="en">Localization</SPAN>         </A></LI>
+    <LI class="nav-section">
+    <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/resources/available-resources.html"><SPAN 
+    class="en">Resource Types</SPAN>           </A></DIV>
+    <UL>
+      <LI><A href="http://developer.android.com/guide/topics/resources/animation-resource.html">Animation</A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/resources/color-list-resource.html">Color 
+      State List</A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/resources/drawable-resource.html">Drawable</A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/resources/layout-resource.html">Layout</A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/resources/menu-resource.html">Menu</A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/resources/string-resource.html">String</A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/resources/style-resource.html">Style</A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/resources/more-resources.html">More 
+      Types</A></LI></UL></LI><!-- end of resource types -->     </UL></LI><!-- end of app resources --> 
+    
+  <LI class="nav-section">
+  <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/manifest/manifest-intro.html"><SPAN 
+  class="en">App Manifest</SPAN>     </A></DIV>
+  <UL>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/action-element.html">&lt;action&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/activity-element.html">&lt;activity&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/activity-alias-element.html">&lt;activity-alias&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/application-element.html">&lt;application&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/category-element.html">&lt;category&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/compatible-screens-element.html">&lt;compatible-screens&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/data-element.html">&lt;data&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/grant-uri-permission-element.html">&lt;grant-uri-permission&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/instrumentation-element.html">&lt;instrumentation&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/intent-filter-element.html">&lt;intent-filter&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/manifest-element.html">&lt;manifest&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/meta-data-element.html">&lt;meta-data&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/path-permission-element.html">&lt;path-permission&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/permission-element.html">&lt;permission&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/permission-group-element.html">&lt;permission-group&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/permission-tree-element.html">&lt;permission-tree&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/provider-element.html">&lt;provider&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/receiver-element.html">&lt;receiver&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/service-element.html">&lt;service&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/supports-gl-texture-element.html">&lt;supports-gl-texture&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/supports-screens-element.html">&lt;supports-screens&gt;</A></LI><!-- ##api level 4## --> 
+          
+    <LI><A href="http://developer.android.com/guide/topics/manifest/uses-configuration-element.html">&lt;uses-configuration&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/uses-feature-element.html">&lt;uses-feature&gt;</A></LI><!-- ##api level 4## --> 
+          
+    <LI><A href="http://developer.android.com/guide/topics/manifest/uses-library-element.html">&lt;uses-library&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/uses-permission-element.html">&lt;uses-permission&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/uses-permission-sdk-23-element.html">&lt;uses-permission-sdk-23&gt;</A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/manifest/uses-sdk-element.html">&lt;uses-sdk&gt;</A></LI></UL></LI><!-- end of the manifest file --> 
+    
+  <LI class="nav-section">
+  <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/ui/index.html"><SPAN 
+  class="en">User Interface</SPAN>       </A></DIV>
+  <UL>
+    <LI><A 
+    href="http://developer.android.com/guide/topics/ui/overview.html"><SPAN 
+    class="en">Overview</SPAN>         </A></LI>
+    <LI class="nav-section">
+    <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/ui/declaring-layout.html"><SPAN 
+    class="en">Layouts</SPAN>           </A></DIV>
+    <UL>
+      <LI><A href="http://developer.android.com/guide/topics/ui/layout/linear.html"><SPAN 
+      class="en">Linear Layout</SPAN>             </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/ui/layout/relative.html"><SPAN 
+      class="en">Relative Layout</SPAN>             </A></LI><!--
+          <li><a href="/guide/topics/ui/layout/grid.html">
+              <span class="en">Grid Layout</span>
+            </a></li>
+       --> 
+                
+      <LI><A href="http://developer.android.com/guide/topics/ui/layout/listview.html"><SPAN 
+      class="en">List View</SPAN>             </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/ui/layout/gridview.html"><SPAN 
+      class="en">Grid View</SPAN>             </A></LI></UL></LI>
+    <LI class="nav-section">
+    <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/ui/controls.html"><SPAN 
+    class="en">Input Controls</SPAN>           </A></DIV>
+    <UL>
+      <LI><A href="http://developer.android.com/guide/topics/ui/controls/button.html"><SPAN 
+      class="en">Buttons</SPAN>             </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/ui/controls/text.html"><SPAN 
+      class="en">Text Fields</SPAN>             </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/ui/controls/checkbox.html"><SPAN 
+      class="en">Checkboxes</SPAN>             </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/ui/controls/radiobutton.html"><SPAN 
+      class="en">Radio Buttons</SPAN>             </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/ui/controls/togglebutton.html"><SPAN 
+      class="en">Toggle Buttons</SPAN>             </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/ui/controls/spinner.html"><SPAN 
+      class="en">Spinners</SPAN>             </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/ui/controls/pickers.html"><SPAN 
+      class="en">Pickers</SPAN>             </A></LI><!--
+          <li><a href="/guide/topics/ui/controls/progress.html">
+              <span class="en">Seek and Progress Bars</span>
+            </a></li>
+--> 
+              </UL></LI>
+    <LI><A 
+    href="http://developer.android.com/guide/topics/ui/ui-events.html"><SPAN 
+    class="en">Input Events</SPAN>         </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/ui/menus.html"><SPAN 
+    class="en">Menus</SPAN>           </A></LI>
+    <LI><A 
+    href="http://developer.android.com/guide/topics/ui/settings.html"><SPAN 
+    class="en">Settings</SPAN>           </A></LI>
+    <LI><A 
+    href="http://developer.android.com/guide/topics/ui/dialogs.html"><SPAN 
+    class="en">Dialogs</SPAN>           </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/ui/notifiers/notifications.html"><SPAN 
+    class="en">Notifications</SPAN>         </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/ui/notifiers/toasts.html"><SPAN 
+    class="en">Toasts</SPAN>         </A></LI>
+    <LI class="nav-section">
+    <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/search/index.html"><SPAN 
+    class="en">Search</SPAN>           </A></DIV>
+    <UL>
+      <LI><A href="http://developer.android.com/guide/topics/search/search-dialog.html">Creating 
+      a Search Interface</A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/search/adding-recent-query-suggestions.html">Adding 
+      Recent Query Suggestions</A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/search/adding-custom-suggestions.html">Adding 
+      Custom Suggestions</A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/search/searchable-config.html">Searchable 
+      Configuration</A></LI></UL></LI>
+    <LI><A 
+    href="http://developer.android.com/guide/topics/ui/drag-drop.html"><SPAN 
+    class="en">Drag and Drop</SPAN>         </A></LI>
+    <LI class="nav-section">
+    <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/ui/accessibility/index.html"><SPAN 
+    class="en">Accessibility</SPAN>           </A></DIV>
+    <UL>
+      <LI><A href="http://developer.android.com/guide/topics/ui/accessibility/apps.html"><SPAN 
+      class="en">Making Applications Accessible</SPAN>             </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/ui/accessibility/checklist.html"><SPAN 
+      class="en">Accessibility Developer Checklist</SPAN>             </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/ui/accessibility/services.html"><SPAN 
+      class="en">Building Accessibility Services</SPAN>             
+    </A></LI></UL></LI>
+    <LI><A href="http://developer.android.com/guide/topics/ui/themes.html"><SPAN 
+    class="en">Styles and Themes</SPAN>         </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/ui/custom-components.html"><SPAN 
+    class="en">Custom Components</SPAN>         </A></LI></UL></LI><!-- end of User Interface --> 
+     
+  <LI class="nav-section">
+  <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/graphics/index.html"><SPAN 
+  class="en">Animation and Graphics</SPAN>         </A></DIV>
+  <UL>
+    <LI class="nav-section">
+    <LI><A href="http://developer.android.com/guide/topics/graphics/overview.html"><SPAN 
+    class="en">Overview</SPAN>           </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/graphics/prop-animation.html"><SPAN 
+    class="en">Property Animation</SPAN>           </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/graphics/view-animation.html"><SPAN 
+    class="en">View Animation</SPAN>           </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/graphics/drawable-animation.html"><SPAN 
+    class="en">Drawable Animation</SPAN>           </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/graphics/2d-graphics.html"><SPAN 
+    class="en">Canvas and Drawables</SPAN>           </A></LI>
+    <LI><A 
+    href="http://developer.android.com/guide/topics/graphics/opengl.html"><SPAN 
+    class="en">OpenGL ES</SPAN>           </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/graphics/hardware-accel.html"><SPAN 
+    class="en">Hardware Acceleration</SPAN>           </A></LI></UL></LI><!-- end of graphics and animation--> 
+     
+  <LI class="nav-section">
+  <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/renderscript/index.html"><SPAN 
+  class="en">Computation</SPAN>             </A></DIV>
+  <UL>
+    <LI><A href="http://developer.android.com/guide/topics/renderscript/compute.html"><SPAN 
+    class="en">RenderScript</SPAN></A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/renderscript/advanced.html"><SPAN 
+    class="en">Advanced RenderScript</SPAN></A></LI>
+    <LI class="nav-section">
+    <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/renderscript/reference/overview.html"><SPAN 
+    class="en">Runtime API Reference</SPAN>                   </A></DIV>
+    <UL>
+      <LI><A href="http://developer.android.com/guide/topics/renderscript/reference/rs_value_types.html"><SPAN 
+      class="en">Numerical Types</SPAN>                   </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/renderscript/reference/rs_object_types.html"><SPAN 
+      class="en">Object Types</SPAN>                   </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/renderscript/reference/rs_convert.html"><SPAN 
+      class="en">Conversion Functions</SPAN>                   </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/renderscript/reference/rs_math.html"><SPAN 
+      class="en">Mathematical Constants and Functions</SPAN>                   
+      </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/renderscript/reference/rs_vector_math.html"><SPAN 
+      class="en">Vector Math Functions</SPAN>                   </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/renderscript/reference/rs_matrix.html"><SPAN 
+      class="en">Matrix Functions</SPAN>                   </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/renderscript/reference/rs_quaternion.html"><SPAN 
+      class="en">Quaternion Functions</SPAN>                   </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/renderscript/reference/rs_atomic.html"><SPAN 
+      class="en">Atomic Update Functions</SPAN>                   </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/renderscript/reference/rs_time.html"><SPAN 
+      class="en">Time Functions and Types</SPAN>                   </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/renderscript/reference/rs_allocation_data.html"><SPAN 
+      class="en">Allocation Data Access Functions</SPAN>                   
+      </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/renderscript/reference/rs_object_info.html"><SPAN 
+      class="en">Object Characteristics Functions</SPAN>                   
+      </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/renderscript/reference/rs_for_each.html"><SPAN 
+      class="en">Kernel Invocation Functions and Types</SPAN>                   
+      </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/renderscript/reference/rs_io.html"><SPAN 
+      class="en">Input/Output Functions</SPAN>                   </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/renderscript/reference/rs_debug.html"><SPAN 
+      class="en">Debugging Functions</SPAN>                   </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/renderscript/reference/rs_graphics.html"><SPAN 
+      class="en">Graphics Functions and Types</SPAN>                   </A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/renderscript/reference/index.html"><SPAN 
+      class="en">Index</SPAN>                   </A></LI></UL></LI></UL></LI>
+  <LI class="nav-section">
+  <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/media/index.html"><SPAN 
+  class="en">Media and Camera</SPAN>           </A></DIV>
+  <UL>
+    <LI><A href="http://developer.android.com/guide/topics/media/mediaplayer.html"><SPAN 
+    class="en">Media Playback</SPAN></A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/media/mediarouter.html"><SPAN 
+    class="en">Media Router</SPAN></A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/media/mediarouteprovider.html"><SPAN 
+    class="en">Media Route Provider</SPAN></A></LI>
+    <LI><A 
+    href="http://developer.android.com/guide/topics/media/exoplayer.html"><SPAN 
+    class="en">ExoPlayer</SPAN></A></LI>
+    <LI><A 
+    href="http://developer.android.com/guide/appendix/media-formats.html"><SPAN 
+    class="en">Supported Media Formats</SPAN></A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/media/audio-capture.html"><SPAN 
+    class="en">Audio Capture</SPAN></A></LI>
+    <LI><A 
+    href="http://developer.android.com/guide/topics/media/jetplayer.html"><SPAN 
+    class="en">JetPlayer</SPAN></A></LI>
+    <LI><A 
+    href="http://developer.android.com/guide/topics/media/camera.html"><SPAN 
+    class="en">Camera</SPAN></A></LI></UL></LI><!-- end of media and camera -->    
+     
+  <LI class="nav-section">
+  <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/sensors/index.html"><SPAN 
+  class="en">Location and Sensors</SPAN>               </A></DIV>
+  <UL>
+    <LI><A 
+    href="http://developer.android.com/guide/topics/location/index.html"><SPAN 
+    class="en">Location and Maps</SPAN>              </A>
+    <LI><A href="http://developer.android.com/guide/topics/location/strategies.html"><SPAN 
+    class="en">Location Strategies</SPAN>              </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/sensors/sensors_overview.html"><SPAN 
+    class="en">Sensors Overview</SPAN>             </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/sensors/sensors_motion.html"><SPAN 
+    class="en">Motion Sensors</SPAN>             </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/sensors/sensors_position.html"><SPAN 
+    class="en">Position Sensors</SPAN>             </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/sensors/sensors_environment.html"><SPAN 
+    class="en">Environment Sensors</SPAN>             </A></LI></UL></LI><!-- end of location and sensors --> 
+  <LI class="nav-section">
+  <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/connectivity/index.html"><SPAN 
+  class="en">Connectivity</SPAN>              </A></DIV>
+  <UL>
+    <LI class="nav-section">
+    <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/connectivity/bluetooth.html"><SPAN 
+    class="en">Bluetooth</SPAN></A></DIV>
+    <UL>
+      <LI><A href="http://developer.android.com/guide/topics/connectivity/bluetooth-le.html">Bluetooth 
+      Low Energy</A></LI></UL></LI>
+    <LI class="nav-section">
+    <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/connectivity/nfc/index.html"><SPAN 
+    class="en">NFC</SPAN></A></DIV>
+    <UL>
+      <LI><A href="http://developer.android.com/guide/topics/connectivity/nfc/nfc.html">NFC 
+      Basics</A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/connectivity/nfc/advanced-nfc.html">Advanced 
+      NFC</A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/connectivity/nfc/hce.html">Host-based 
+      Card Emulation</A></LI></UL></LI>
+    <LI><A href="http://developer.android.com/guide/topics/connectivity/wifip2p.html"><SPAN 
+    class="en">Wi-Fi P2P</SPAN></A></LI>
+    <LI class="nav-section">
+    <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/connectivity/usb/index.html"><SPAN 
+    class="en">USB</SPAN></A></DIV>
+    <UL>
+      <LI><A href="http://developer.android.com/guide/topics/connectivity/usb/accessory.html">Accessory</A></LI>
+      <LI><A href="http://developer.android.com/guide/topics/connectivity/usb/host.html">Host</A></LI></UL></LI>
+    <LI><A href="http://developer.android.com/guide/topics/connectivity/sip.html"><SPAN 
+    class="en">SIP</SPAN>           </A></LI></UL></LI><!-- end of connectivity --> 
+        
+  <LI class="nav-section">
+  <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/text/index.html"><SPAN 
+  class="en">Text and Input</SPAN>         </A></DIV>
+  <UL>
+    <LI><A 
+    href="http://developer.android.com/guide/topics/text/copy-paste.html"><SPAN 
+    class="en">Copy and Paste</SPAN>             </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/text/creating-input-method.html"><SPAN 
+    class="en">Creating an IME</SPAN>             </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/text/spell-checker-framework.html"><SPAN 
+    class="en">Spelling Checker</SPAN>             </A></LI></UL></LI><!-- end of text and input --> 
+       
+  <LI class="nav-section">
+  <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/data/index.html"><SPAN 
+  class="en">Data Storage</SPAN>         </A></DIV>
+  <UL>
+    <LI><A href="http://developer.android.com/guide/topics/data/data-storage.html"><SPAN 
+    class="en">Storage Options</SPAN>            </A></LI>
+    <LI><A 
+    href="http://developer.android.com/guide/topics/data/backup.html"><SPAN 
+    class="en">Data Backup</SPAN>           </A></LI>
+    <LI><A href="http://developer.android.com/guide/topics/data/install-location.html"><SPAN 
+    class="en">App Install Location</SPAN>           </A></LI></UL></LI><!-- end of data storage --> 
+    
+  <LI class="nav-section">
+  <DIV class="nav-section-header"><A href="http://developer.android.com/guide/topics/admin/index.html"><SPAN 
+  class="en">Administration</SPAN>              </A></DIV>
+  <UL>
+    <LI><A href="http://developer.android.com/guide/topics/admin/device-admin.html"><SPAN 
+    class="en">Device Policies</SPAN></A></LI><!--
+              <li>
+                <a href="/guide/topics/admin/keychain.html">
+                <span class="en">Certificate Store</span></a>
+              </li>
+            --> 
+               </UL></LI><!-- end of administration -->   
+  <LI class="nav-section">
+  <DIV class="nav-section-header"><A href="http://developer.android.com/guide/webapps/index.html"><SPAN 
+  class="en">Web Apps</SPAN>     </A></DIV>
+  <UL>
+    <LI><A 
+    href="http://developer.android.com/guide/webapps/targeting.html"><SPAN 
+    class="en">Supporting Different Screens in Web Apps</SPAN>           
+    </A></LI>
+    <LI><A href="http://developer.android.com/guide/webapps/webview.html"><SPAN 
+    class="en">Building Web Apps in WebView</SPAN>           </A></LI>
+    <LI><A 
+    href="http://developer.android.com/guide/webapps/migrating.html"><SPAN 
+    class="en">Migrating to WebView in Android 4.4</SPAN>           </A></LI>
+    <LI><A 
+    href="http://developer.android.com/guide/webapps/debugging.html"><SPAN 
+    class="en">Debugging Web Apps</SPAN>           </A></LI>
+    <LI><A 
+    href="http://developer.android.com/guide/webapps/best-practices.html"><SPAN 
+    class="en">Best Practices for Web Apps</SPAN>           </A></LI></UL></LI><!-- end of web apps --> 
+    
+  <LI class="nav-section">
+  <DIV class="nav-section-header"><A href="http://developer.android.com/guide/practices/index.html"><SPAN 
+  class="en">Best Practices</SPAN>       <SPAN class="de" 
+  style="display: none;">Bewährte Verfahren</SPAN>       <SPAN class="es" style="display: none;">Prácticas 
+  recomendadas</SPAN>       <SPAN class="fr" style="display: none;">Meilleures 
+  pratiques</SPAN>       <SPAN class="it" style="display: none;">Best 
+  practice</SPAN>       <SPAN class="ja" style="display: none;">ベスト 
+  プラクティス</SPAN>       <SPAN class="zh-cn" style="display: none;">最佳实践</SPAN>     
+    <SPAN class="zh-tw" style="display: none;">最佳實務</SPAN>     </A></DIV>
+  <UL>
+    <LI class="nav-section">
+    <DIV class="nav-section-header"><A href="http://developer.android.com/guide/practices/screens_support.html"><SPAN 
+    class="en">Supporting Multiple Screens</SPAN>         </A></DIV>
+    <UL>
+      <LI><A href="http://developer.android.com/guide/practices/screens-distribution.html"><SPAN 
+      class="en">Distributing to Specific Screens</SPAN>           </A></LI>
+      <LI><A href="http://developer.android.com/guide/practices/screen-compat-mode.html"><SPAN 
+      class="en">Screen Compatibility Mode</SPAN>           </A></LI></UL></LI>
+    <LI><A href="http://developer.android.com/guide/practices/tablets-and-handsets.html"><SPAN 
+    class="en">Supporting Tablets and Handsets</SPAN>           </A></LI>
+    <LI><A href="http://developer.android.com/guide/practices/verifying-apps-art.html"><SPAN 
+    class="en">Verifying App Behavior on ART</SPAN>         </A></LI></UL></LI></UL>
+<SCRIPT type="text/javascript">
+<!--
+    buildToggleLists();
+    changeNavLang(getLangPref());
+//-->
+</SCRIPT>
+         </DIV></DIV></DIV><!-- end side-nav -->     
+<SCRIPT>
+      $(document).ready(function() {
+        scrollIntoView("devdoc-nav");
+        });
+    </SCRIPT>
+ 
+ 
+ <!--正文-->
+ 
+<DIV class="col-12" id="doc-col">
+<H1 itemprop="name">Accessibility</H1>
+
+<H1 itemprop="name">无障碍</H1>
+
+<DIV id="jd-content">
+<DIV class="jd-descr" itemprop="articleBody">
+<DIV id="qv-wrapper">
+<DIV id="qv">
+<H2>Topics</H2>
+
+<H2>主题</H2>
+
+<OL>
+  <LI><A href="http://developer.android.com/guide/topics/ui/accessibility/apps.html"> 
+     Making Applications Accessible</A></LI>
+  <LI><A href="http://developer.android.com/guide/topics/ui/accessibility/checklist.html"> 
+     Accessibility Developer Checklist</A></LI>
+  <LI><A href="http://developer.android.com/guide/topics/ui/accessibility/services.html"> 
+     Building Accessibility Services</A></LI></OL>
+	 
+<OL>
+  <LI><A href="http://developer.android.com/guide/topics/ui/accessibility/apps.html"> 
+     让应用无障碍</A></LI>
+  <LI><A href="http://developer.android.com/guide/topics/ui/accessibility/checklist.html"> 
+     无障碍开发清单</A></LI>
+  <LI><A href="http://developer.android.com/guide/topics/ui/accessibility/services.html"> 
+     构建无障碍服务</A></LI></OL>
+	 
+<H2>See also</H2>
+
+<H2>更多</H2>
+
+<OL>
+  <LI><A 
+  href="http://developer.android.com/design/patterns/accessibility.html">Android 
+  Design: Accessibility</A></LI>
+  <LI><A 
+  href="http://developer.android.com/training/accessibility/index.html">Training: 
+  Implementing Accessibility</A></LI>
+  <LI><A href="http://developer.android.com/tools/testing/testing_accessibility.html">Accessibility 
+  Testing Checklist</A></LI></OL>
+  
+  <OL>
+  <LI><A 
+  href="http://developer.android.com/design/patterns/accessibility.html">Android 
+  设计：无障碍</A></LI>
+  <LI><A 
+  href="http://developer.android.com/training/accessibility/index.html">培训：实现无障碍</A></LI>
+  <LI><A href="http://developer.android.com/tools/testing/testing_accessibility.html">无障碍检测清单</A></LI></OL>
+  
+<H2>Related Videos</H2>
+
+  
+<H2>相关视频</H2>
+
+<OL>
+  <LI><IFRAME width="210" height="160" title="Google I/O 2012 - Making Android Apps Accessible" 
+  src="Accessibility%20%20Android%20Developers_files/q3HliaMjL38.htm" 
+  frameborder="0" allowfullscreen=""></IFRAME>     
+  <LI></LI></OL></DIV></DIV>
+<P>Many Android users have different abilities that require them to interact 
+with their Android devices in different ways. These include users who have 
+visual, physical or age-related limitations that prevent them from fully seeing 
+or using a touchscreen, and users with hearing loss who may not be able to 
+perceive audible information and alerts.</P>
+
+<P>很多Android用户因能力差异，需要使用不同的方式与Android设备进行交互。视觉障碍、肢体残疾和与年龄有关的障碍用户，不能充分的看到或使用触摸屏，还有听力障碍用户因听力损失而无法获取音频信息和警报。</P>
+
+
+<P>Android provides accessibility features and services for helping these users 
+navigate their devices more easily, including text-to-speech, haptic feedback, 
+gesture navigation, trackball and directional-pad navigation. Android 
+application developers can take advantage of these services to make their 
+applications more accessible.</P>
+
+<P>Android提供了无障碍特性和服务，帮助这些用户更轻松地浏览他们的设备，包括文本转语音、触觉反馈、手势导航、轨迹球和定向垫导航。 Android应用程序开发者可以利用这些服务，使他们的应用程序更加无障碍。</P>
+
+<P>Android developers can also build their own accessibility services, which can 
+provide enhanced usability features such as audio prompting, physical feedback, 
+and alternative navigation modes. Accessibility services can provide these 
+enhancements for all applications, a set of applications or just a single 
+app.</P>
+
+<P>Android开发者还可以建立自己的无障碍服务，提供更强的可用性特性，如音频提示、物理反馈以及替代导航方式。无障碍服务可以为所有应用、一组应用或单一的app提供这些增强特性。</P>
+
+<P>The following topics show you how to use the Android framework to make 
+applications more accessible.</P>
+
+<P>以下主题展示了如何使用Android框架，使应用程序更加无障碍：</P>
+
+<DL>
+  <DT><STRONG><A href="http://developer.android.com/guide/topics/ui/accessibility/apps.html"> 
+   Making Applications Accessible</A></STRONG>   </DT>
+  <DD>Development practices and API features to ensure your application is 
+  accessible to users with disabilities.</DD>
+  <DT><STRONG><A href="http://developer.android.com/guide/topics/ui/accessibility/checklist.html"> 
+   Accessibility Developer Checklist</A></STRONG>   </DT>
+  <DD>A checklist to help developers ensure that their applications are 
+  accessible.</DD>
+  <DT><STRONG><A href="http://developer.android.com/guide/topics/ui/accessibility/services.html"> 
+   Building Accessibility Services</A></STRONG>   </DT>
+  <DD>How to use API features to build services that make other applications 
+  more accessible for users.</DD></DL>
+  
+  <DL>
+  <DT><STRONG><A href="http://developer.android.com/guide/topics/ui/accessibility/apps.html"> 
+ 让应用无障碍</A></STRONG>   </DT>
+  <DD>开发实践和API特性可以确保应用程序对残障人群无障碍。</DD>
+  <DT><STRONG><A href="http://developer.android.com/guide/topics/ui/accessibility/checklist.html"> 
+ 无障碍开发清单</A></STRONG>   </DT>
+  <DD>一个帮助开发人员确保他们的应用无障碍的清单。</DD>
+  <DT><STRONG><A href="http://developer.android.com/guide/topics/ui/accessibility/services.html"> 
+  构建无障碍服务</A></STRONG>   </DT>
+  <DD>如何使用API特性来构建无障碍服务，使其他应用程序对用户更加无障碍。</DD></DL>
+  
+  </DIV></DIV>
+  
+  <!--完-->
+  <!-- end jd-content --> 
+<DIV class="wrap">
+<DIV class="dac-footer">
+<DIV class="cols dac-footer-main">
+<DIV class="col-1of2"><A class="dac-footer-getnews" href="javascript:;" 
+data-modal-toggle="newsletter">Get news &amp; tips <SPAN class="dac-fab dac-primary"><I 
+class="dac-sprite dac-mail"></I></SPAN></A>       </DIV>
+<DIV class="col-1of2 dac-footer-reachout">
+<DIV class="dac-footer-contact"><A class="dac-footer-contact-link" href="http://android-developers.blogspot.com/">Blog</A> 
+          <A class="dac-footer-contact-link" href="http://developer.android.com/support.html">Support</A> 
+        </DIV>
+<DIV class="dac-footer-social"><A class="dac-fab dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers"><I 
+class="dac-sprite dac-youtube"></I></A>           <A class="dac-fab dac-footer-social-link" 
+href="https://plus.google.com/+AndroidDevelopers"><I class="dac-sprite dac-gplus"></I></A> 
+          <A class="dac-fab dac-footer-social-link" href="https://twitter.com/AndroidDev"><I 
+class="dac-sprite dac-twitter"></I></A>         </DIV></DIV></DIV>
+<HR class="dac-footer-separator">
+
+<P class="dac-footer-copyright">          Except as noted, this content is  
+licensed under <A href="http://creativecommons.org/licenses/by/2.5/">  Creative 
+Commons Attribution 2.5</A>. For details and  restrictions, see the <A href="http://developer.android.com/license.html">Content 
+ License</A>.       </P>
+<P class="dac-footer-links"><A href="http://developer.android.com/about/index.html">About 
+Android</A>       <A 
+href="http://developer.android.com/auto/index.html">Auto</A>       <A href="http://developer.android.com/tv/index.html">TV</A> 
+      <A href="http://developer.android.com/wear/index.html">Wear</A>       <A 
+href="http://developer.android.com/legal.html">Legal</A>       <SPAN class="locales" 
+id="language"><SELECT name="language" onchange="changeLangPref(this.value, true)"><OPTION 
+  selected="selected" value="en">English</OPTION>           <OPTION 
+  value="es">Español</OPTION>           <OPTION value="in">Bahasa 
+  Indonesia</OPTION>           <OPTION value="ja">日本語</OPTION>           <OPTION 
+  value="ko">한국어</OPTION>           <OPTION value="pt-br">Português 
+  Brasileiro</OPTION>           <OPTION value="ru">Русский</OPTION>           
+  <OPTION value="vi">tiếng Việt</OPTION>           <OPTION 
+  value="zh-cn">中文（简体)</OPTION>           <OPTION value="zh-tw">中文（繁體)</OPTION>  
+         </SELECT>       </SPAN></P></DIV></DIV><!-- end footer --> 
+<DIV class="dac-modal newsletter" data-swap="" data-newsletter="" data-modal="newsletter">
+<DIV class="dac-modal-container">
+<DIV class="dac-modal-window"><HEADER class="dac-modal-header"><BUTTON class="dac-modal-header-close" 
+data-modal-toggle=""><I class="dac-sprite dac-close"></I></BUTTON>         
+<DIV class="dac-swap" data-swap-container=""><SECTION class="dac-swap-section dac-active dac-down">
+<H2 class="norule dac-modal-header-title">Get the latest Android developer news 
+and tips that will help you find success on Google Play.</H2>
+<P class="dac-modal-header-subtitle">* Required Fields</P></SECTION><SECTION 
+class="dac-swap-section dac-up">
+<H2 class="norule dac-modal-header-title">Hooray!</H2></SECTION></DIV></HEADER>
+<DIV class="dac-swap" data-swap-container=""><SECTION class="dac-swap-section dac-active dac-left">
+<FORM class="dac-form" action="https://docs.google.com/forms/d/1QgnkzbEJIDu9lMEea0mxqWrXUJu0oBCLD7ar23V0Yys/formResponse" 
+method="post" target="dac-newsletter-iframe"><SECTION class="dac-modal-content">
+<FIELDSET class="dac-form-fieldset">
+<DIV class="cols">
+<DIV class="col-1of2 newsletter-leftCol">
+<DIV class="dac-form-input-group"><LABEL class="dac-form-floatlabel" for="newsletter-full-name">Full 
+name</LABEL><INPUT name="entry.1357890476" class="dac-form-input" id="newsletter-full-name" required="" type="text"><SPAN 
+class="dac-form-required">*</SPAN></DIV>
+<DIV class="dac-form-input-group"><LABEL class="dac-form-floatlabel" for="newsletter-email">Email 
+address</LABEL><INPUT name="entry.472100832" class="dac-form-input" id="newsletter-email" required="" type="email"><SPAN 
+class="dac-form-required">*</SPAN></DIV></DIV>
+<DIV class="col-1of2 newsletter-rightCol">
+<DIV class="dac-form-input-group"><LABEL class="dac-form-floatlabel" for="newsletter-company">Company 
+/ developer 
+name</LABEL><INPUT name="entry.1664780309" class="dac-form-input" id="newsletter-company" type="text"></DIV>
+<DIV class="dac-form-input-group"><LABEL class="dac-form-floatlabel" for="newsletter-play-store">One 
+of your Play Store app URLs</LABEL><INPUT name="entry.47013838" class="dac-form-input" id="newsletter-play-store" required="" type="url"><SPAN 
+class="dac-form-required">*</SPAN></DIV></DIV></DIV></FIELDSET>
+<FIELDSET class="dac-form-fieldset">
+<DIV class="cols">
+<DIV class="col-1of2 newsletter-leftCol"><LEGEND class="dac-form-legend">Which 
+best describes your business:<SPAN class="dac-form-required">*</SPAN>            
+         </LEGEND>
+<DIV class="dac-form-radio-group"><INPUT name="entry.1796324055" class="dac-form-radio" 
+id="newsletter-business-type-app" required="" type="radio" value="Apps">         
+              <LABEL class="dac-form-radio-button" for="newsletter-business-type-app"></LABEL> 
+                      <LABEL class="dac-form-label" for="newsletter-business-type-app">Apps</LABEL> 
+                    </DIV>
+<DIV class="dac-form-radio-group"><INPUT name="entry.1796324055" class="dac-form-radio" 
+id="newsletter-business-type-games" required="" type="radio" value="Games">      
+                 <LABEL class="dac-form-radio-button" for="newsletter-business-type-games"></LABEL> 
+                      <LABEL class="dac-form-label" for="newsletter-business-type-games">Games</LABEL> 
+                    </DIV>
+<DIV class="dac-form-radio-group"><INPUT name="entry.1796324055" class="dac-form-radio" 
+id="newsletter-business-type-appsgames" required="" type="radio" value="Apps and Games"> 
+                      <LABEL class="dac-form-radio-button" for="newsletter-business-type-appsgames"></LABEL> 
+                      <LABEL class="dac-form-label" for="newsletter-business-type-appsgames">Apps 
+&amp; Games</LABEL>                     </DIV></DIV>
+<DIV class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+<DIV class="dac-form-radio-group">
+<DIV class="dac-media">
+<DIV class="dac-media-figure"><INPUT name="entry.732309842" class="dac-form-checkbox" 
+id="newsletter-add" required="" type="checkbox" value="Add me to the mailing list for the monthly newsletter and occasional emails about development and Google Play opportunities."> 
+                          <LABEL class="dac-form-checkbox-button" for="newsletter-add"></LABEL> 
+                        </DIV>
+<DIV class="dac-media-body"><LABEL class="dac-form-label dac-form-aside" for="newsletter-add">Add 
+me to the mailing list for the monthly newsletter and occasional emails about 
+development and Google Play opportunities.<SPAN 
+class="dac-form-required">*</SPAN></LABEL>                         
+</DIV></DIV></DIV>
+<DIV class="dac-form-radio-group">
+<DIV class="dac-media">
+<DIV class="dac-media-figure"><INPUT name="entry.2045036090" class="dac-form-checkbox" 
+id="newsletter-terms" required="" type="checkbox" value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/)."> 
+                          <LABEL class="dac-form-checkbox-button" for="newsletter-terms"></LABEL> 
+                        </DIV>
+<DIV class="dac-media-body"><LABEL class="dac-form-label dac-form-aside" for="newsletter-terms">I 
+acknowledge that the information provided in this form will be subject to <A 
+href="https://www.google.com/policies/privacy/">Google's privacy 
+policy</A>.<SPAN class="dac-form-required">*</SPAN></LABEL>                      
+   </DIV></DIV></DIV></DIV></DIV></FIELDSET></SECTION><FOOTER class="dac-modal-footer">
+<DIV class="cols">
+<DIV class="col-2of5"></DIV></DIV><BUTTON class="dac-fab dac-primary dac-large dac-modal-action" 
+type="submit" value="Submit"><I class="dac-sprite dac-arrow-right"></I></BUTTON> 
+            </FOOTER></FORM></SECTION><SECTION class="dac-swap-section dac-right">
+<DIV class="dac-modal-content">
+<P class="newsletter-success-message">              You have successfully signed 
+up for the latest Android developer news and tips.             
+</P></DIV></SECTION></DIV></DIV></DIV></DIV><!-- end footer --> </DIV><!-- end doc-content --> 
+</DIV><!-- end .cols --> </DIV><!-- end body-content -->   
+<SCRIPT src="Accessibility%20%20Android%20Developers_files/ytblogger_lists_unified.json" type="text/javascript"></SCRIPT>
+   
+<SCRIPT src="Accessibility%20%20Android%20Developers_files/jd_lists_unified.js" type="text/javascript"></SCRIPT>
+   
+<SCRIPT src="Accessibility%20%20Android%20Developers_files/jd_extras.js" type="text/javascript"></SCRIPT>
+   
+<SCRIPT src="Accessibility%20%20Android%20Developers_files/jd_collections.js" type="text/javascript"></SCRIPT>
+   
+<SCRIPT src="Accessibility%20%20Android%20Developers_files/jd_tag_helpers.js" type="text/javascript"></SCRIPT>
+ </BODY></HTML>
